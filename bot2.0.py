@@ -133,5 +133,56 @@ async def repetir(ctx, times: int, content='repeating...'):
 async def jokenpo(ctx, escolha: str):
     """Joga jokenpo (pedra, papel ou tesoura)."""
     await ctx.send(cal_jokenpo(escolha.lower()))
+
+bot.remove_command('help')
+
+@bot.command(name="ajuda", aliases=["help"])
+async def ajuda(ctx):
+    """Exibe a lista de comandos disponíveis e como usá-los."""
+    embed = discord.Embed(
+        title="🤖 Central de Ajuda do Bot",
+        description="Aqui estão todos os comandos disponíveis e como utilizá-los:",
+        color=discord.Color.blue()
+    )
+
+    # Adiciona seções de comandos na mensagem
+    embed.add_field(
+        name="👋 Interações Básicas",
+        value="`>oi` - Recebe uma saudação.\n"
+              "`>tchau` - Despedida do bot.\n"
+              "`>emoji` - Envia um emoji aleatório.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="🎲 Jogos e Sorteios",
+        value="`>moeda [quantidade]` - Joga moedas (ex: `>moeda 3`).\n"
+              "`>jokenpo <pedra|papel|tesoura>` - Joga pedra, papel ou tesoura.\n"
+              "`>rolar <NdN>` - Rola dados no formato RPG (ex: `>rolar 2d6`).\n"
+              "`>escolha <opção1> <opção2>...` - Escolhe um item aleatório.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="🧮 Úteis & Matemática",
+        value="`>senha [tamanho]` - Gera uma senha segura (padrão: 10 caracteres).\n"
+              "`>soma <num1> <num2>` - Soma dois números.\n"
+              "`>subtrair <num1> <num2>` - Subtrai dois números.\n"
+              "`>multiplicar <num1> <num2>` - Multiplica dois números.\n"
+              "`>dividir <num1> <num2>` - Divide dois números.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="📱 Outros",
+        value="`>repetir <quantidade> [mensagem]` - Repete uma mensagem várias vezes.\n"
+              "`>entrada <@usuário>` - Mostra quando um usuário entrou no servidor.\n",
+        inline=False
+    )
+
+    embed.set_footer(text="Dica: Parâmetros entre < > são obrigatórios e [ ] são opcionais.")
+
+    await ctx.send(embed=embed)
+
 # Execução do Bot utilizando a chave TOKEN do dicionário de configurações
 bot.run(settings["TOKEN"])
