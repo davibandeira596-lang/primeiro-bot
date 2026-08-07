@@ -55,7 +55,11 @@ def gen_pass(pass_length):
     return senha
 
 def gen_emodji():
-    emodji = ["\U0001f600", "\U0001f642", "\U0001F606", "\U0001F923"]
+    emodji = ["\U0001f600", "\U0001f642", "\U0001F606", "\U0001F923", "\U0001F609", "\U0001F60A", "\U0001F60D", "\U0001F618", "\U0001F970",
+              "\U0001F60E", "\U0001F917", "\U0001F92D", "\U0001F92A", "\U0001F92B",
+              "\U0001F914", "\U0001F910", "\U0001F928", "\U0001F610", "\U0001F611",
+              "\U0001F636", "\U0001F60C", "\U0001F61B", "\U0001F61C", "\U0001F61D",
+              "\U0001F924", "\U0001F612", "\U0001F613", "\U0001F614", "\U0001F615", "\U0001F643", "\U0001F911", "\U0001F632", "\U0001F641",]
     return random.choice(emodji)
 
 def flip_coin(num_flips):
@@ -265,6 +269,11 @@ async def provas(ctx):
         texto += f"📅 {data} - {materia}\n"
     await ctx.send(texto)
 
+@bot.command()
+async def melhor(ctx, name: str):
+    """dizer que algo é o melhor."""
+    await ctx.send(f"O {name} é o melhor!")
+
 # --- AJUDA / HELP ---
 
 bot.remove_command('help')
@@ -310,6 +319,20 @@ async def ajuda(ctx):
               f"`{p}subtrair <num1> <num2>` - Subtrai dois números.\n"
               f"`{p}multiplicar <num1> <num2>` - Multiplica dois números.\n"
               f"`{p}dividir <num1> <num2>` - Divide dois números.",
+        inline=False
+    )
+
+    embed.add_field(
+        name="musical 🎵",
+        value=f"`<tocar <nome ou link>` - toca ou adiciona música à fila.\n"
+              f"`<pause` - pausa a música atual.\n"
+              f"`<resume` - retoma a música pausada.\n"
+              f"`<pular` - Pula a música atual.\n"
+              f"`<fila` - Mostra a fila de músicas.\n"
+              f"`<tocando` - Mostra a música tocando no momento.\n"
+              f"`<volume <0-100>` - Ajusta o volume.\n"
+              f"`<parar` - Para a reprodução e limpa a fila.\n"
+              f"`<sair` - Desconecta o bot do canal de voz.",
         inline=False
     )
 
