@@ -1,5 +1,5 @@
 settings = {
     "prefix": ">",
-    "TOKEN": "token_aqui"
-
+    "TOKEN": "",
+    "GEMINI_API_KEY": "",
 }
