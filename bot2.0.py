@@ -16,6 +16,9 @@ GEMINI_API_KEY = settings.get("GEMINI_API_KEY", "SUA_CHAVE_GEMINI_AQUI")
 # ID do canal onde o bot enviará os avisos automáticos de prova
 CANAL_PROVAS = 1532137072775790692
 
+# ID do canal onde o bot enviará as mensagens de boas-vindas
+CANAL_BOAS_VINDAS = 123456789012345678  # <--- Substitua pelo ID do seu canal
+
 # ==========================
 # GEMINI & FUSO HORÁRIO
 # ==========================
@@ -127,6 +130,14 @@ async def on_ready():
     # Inicia o loop de aviso de provas
     if not verificar_provas.is_running():
         verificar_provas.start()
+
+@bot.event
+async def on_member_join(member):
+    """Envia uma mensagem de boas-vindas ao novo membro em um canal específico."""
+    channel = bot.get_channel(CANAL_BOAS_VINDAS)
+    if channel is not None:
+        to_send = f'Welcome {member.mention} to {member.guild.name}!'
+        await channel.send(to_send)
 
 @bot.event
 async def on_message(message):
