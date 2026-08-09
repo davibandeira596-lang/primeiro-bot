@@ -14,10 +14,10 @@ from settings import settings
 GEMINI_API_KEY = settings.get("GEMINI_API_KEY", "SUA_CHAVE_GEMINI_AQUI")
 
 # ID do canal onde o bot enviará os avisos automáticos de prova
-CANAL_PROVAS = 1532137072775790692
+CANAL_PROVAS = 1535818702514167838  # <--- Substitua pelo ID do seu canal
 
 # ID do canal onde o bot enviará as mensagens de boas-vindas
-CANAL_BOAS_VINDAS = 123456789012345678  # <--- Substitua pelo ID do seu canal
+CANAL_BOAS_VINDAS = 1535818323151818843  # <--- Substitua pelo ID do seu canal
 
 # ==========================
 # GEMINI & FUSO HORÁRIO
@@ -31,19 +31,12 @@ fuso = pytz.timezone("America/Sao_Paulo")
 # ==========================
 
 calendario_provas = {
-    "31/07": "Redação",
-    "04/08": "Geografia",
-    "07/08": "Matemática",
-    "11/08": "Biologia",
-    "12/08": "Sociologia",
-    "14/08": "História",
-    "17/08": "Inglês",
-    "18/08": "Química",
-    "21/08": "Arte",
-    "28/08": "Português",
-    "31/08": "Física",
-    "01/09": "Filosofia",
-    "04/09": "Ed. Digital"
+    "15/08": "simulado enem",
+    "20/08": "artes, historia ed fisica e redação",
+    "21/08": "gramática, biologia e inglês",
+    "24/08": "matemática e geografia",
+    "25/08": "quimica e filosofia",
+    "26/08": "física, sociologia e literatura"
 }
 
 avisos_enviados = []
@@ -100,8 +93,8 @@ bot = commands.Bot(command_prefix=settings.get("prefix", "#"), intents=intents)
 async def verificar_provas():
     agora = datetime.now(fuso)
 
-    # Só envia às 15:00
-    if agora.hour != 15 or agora.minute != 0:
+    # Só envia às 15:30
+    if agora.hour != 15 or agora.minute != 30:
         return
 
     amanha = agora + timedelta(days=1)
