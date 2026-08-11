@@ -5,7 +5,7 @@ from google import genai
 from datetime import datetime, timedelta
 import pytz
 from settings import settings
-
+import os
 # ==========================
 # CONFIGURAÇÕES ADICIONAIS
 # ==========================
@@ -278,6 +278,17 @@ async def melhor(ctx, name: str):
     """dizer que algo é o melhor."""
     await ctx.send(f"O {name} é o melhor!")
 
+@bot.command()
+async def meme(ctx):
+    """Envia um meme aleatório do diretório de imagens."""
+    image_list = os.listdir('C:\\Users\\Usuário\\Desktop\\bot\\images')
+    img_name = random.choice(image_list)
+    with open(f'C:\\Users\\Usuário\\Desktop\\bot\\images\\{img_name}', 'rb') as f:
+        #Vamos armazenar o arquivo convertido da biblioteca do Discord nesta variável!
+        picture = discord.File(f)
+    # Podemos então enviar esse arquivo como um parâmetro
+    await ctx.send(file=picture)
+
 # --- AJUDA / HELP ---
 
 bot.remove_command('help')
@@ -343,7 +354,9 @@ async def ajuda(ctx):
     embed.add_field(
         name="📱 Outros",
         value=f"`{p}repetir <quantidade> [mensagem]` - Repete uma mensagem várias vezes.\n"
-              f"`{p}entrada <@usuário>` - Mostra quando um usuário entrou no servidor.",
+              f"`{p}entrada <@usuário>` - Mostra quando um usuário entrou no servidor."
+              f"`{p}melhor <nome>` - Diz que algo é o melhor!\n"
+              f"`{p}meme` - Envia um meme aleatório.",
         inline=False
     )
 
